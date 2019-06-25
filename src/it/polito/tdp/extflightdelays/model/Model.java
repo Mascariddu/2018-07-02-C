@@ -112,18 +112,17 @@ public class Model {
 
 	private void cerca(List<Airport> parziale, int tratte, int L, Airport destinazione) {
 		// TODO Auto-generated method stub
-		if(L == (tratte-1)) {
-			
-			System.out.println("AGGIUNGO DESTINAZIONE");
-			if(conta(parziale) > conta(best)){
+
+		if(conta(parziale) > conta(best)){
 				
-				best = new ArrayList<Airport>(parziale);
-				System.out.println("NEW BEST");
-				
-			}
-			
+			best = new ArrayList<Airport>(parziale);
+			System.out.println("NEW BEST");
 			return;
+				
 		}
+		
+		if(L==(tratte - 1))
+			return;
 		
 		Airport last = parziale.get(parziale.size()-1);
 		
@@ -138,7 +137,7 @@ public class Model {
 				cerca(parziale, tratte, L+1, destinazione);
 				System.out.println("RIMUOVO");
 				parziale.remove(parziale.size()-1);
-			}
+			} 
 		}
 	}
 
