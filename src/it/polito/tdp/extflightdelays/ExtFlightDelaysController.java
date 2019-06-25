@@ -59,6 +59,7 @@ public class ExtFlightDelaysController {
     		
     		int num = Integer.parseInt(this.compagnieMinimo.getText());
     		model.creaGrafo(num);
+    		this.cmbBoxAeroportoPartenza.getItems().clear();
     		this.cmbBoxAeroportoPartenza.getItems().addAll(model.getVertex());
     		
     	} catch(NumberFormatException e) {
@@ -79,6 +80,7 @@ public class ExtFlightDelaysController {
     		
     		for(String string : model.getConnessi(airport))
     			txtResult.appendText(string+"\n");
+    		this.cmbBoxAeroportoDestinazione.getItems().clear();
     		this.cmbBoxAeroportoDestinazione.getItems().addAll(model.getVertex());
     		
     	} else txtResult.appendText("Seleziona almeno un aeroporto!");
@@ -97,10 +99,12 @@ public class ExtFlightDelaysController {
         int tratte =  Integer.parseInt(numeroTratteTxtInput.getText());
     	if(partenza != null && destinazione != null) {
     		
+    		if(!partenza.equals(destinazione)) {
     		for(Airport airport : model.getSequenza(partenza,destinazione,tratte))
     			txtResult.appendText(airport+"\n");
     		txtResult.appendText("Numero totale di voli: " +model.conta(model.getSequenza(partenza, destinazione, tratte)));
-    			
+    		
+    		}else txtResult.appendText("Seleziona due aeroporti differenti!");
     	} else txtResult.appendText("Seleziona un aeroporto di partenza ed uno di destinazione!");
     	}  catch (NumberFormatException e) {
 			// TODO: handle exception

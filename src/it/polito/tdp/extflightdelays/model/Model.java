@@ -33,10 +33,11 @@ public class Model {
 
 	public void creaGrafo(int num) {
 		// TODO Auto-generated method stub
+		idMap = new HashMap<Integer, Airport>();
 		grafo = new SimpleWeightedGraph<Airport, DefaultWeightedEdge>(DefaultWeightedEdge.class);
 		dao.loadAllAirports(num,idMap);
-		vertex = dao.getAirports(num,idMap);
-		adiacenze = dao.getArco(idMap);
+		vertex = new ArrayList<Airport>(dao.getAirports(num,idMap));
+		adiacenze = new ArrayList<Adiacenza>(dao.getArco(idMap));
 		
 		Graphs.addAllVertices(grafo, vertex);
 		
@@ -106,7 +107,8 @@ public class Model {
 		
 		cerca(parziale,tratte,0,destinazione);
 		
-		best.add(destinazione);
+		if(!best.contains(destinazione))
+				best.add(destinazione);
 		return best;
 	}
 
